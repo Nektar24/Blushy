@@ -6,11 +6,11 @@ const starting = require("../data/variables.json");
 const config = require('../config.json');
 
 module.exports = {
-	name: 'company',
+    name: 'company',
     aliases : ['c'],
     description: "Shows a specific company",
     permissions : 0,
-	execute(message,args) {
+    execute(message,args) {
         if (args[1] == null || args[1] == ' ' || args[1] == ''){
             message.channel.send(new Discord.MessageEmbed().setDescription('/'+args[0] + ' <company-id> [admin] '));
             return;
