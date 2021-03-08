@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 
 module.exports = {
-	name: 'clear',
+    name: 'clear',
     description: 'clears the chat.',
     permissions : 2,
 	execute(message,args) {
