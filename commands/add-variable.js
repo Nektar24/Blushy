@@ -5,7 +5,7 @@ const fs = require('fs');
 let companies = require("../data/companies.json");
 
 module.exports = {
-	name: 'add-variable',
+    name: 'add-variable',
     description: "admin command which adds a variable to all the companies",
     permissions : 1,
 	execute(message,args) {
@@ -22,7 +22,7 @@ module.exports = {
             fs.writeFile("./data/companies.json", JSON.stringify(companies), (err) => { if (err) console.log(err) });
             //save();
         } else {message.channel.send("That variable name already exists.");}
-	},
+    },
     addkey(obj,key){
         var content = '';
         if (obj[key]) {
