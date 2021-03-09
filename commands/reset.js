@@ -9,11 +9,11 @@ let days = require("../data/days.json");
 const starting = require("../data/variables.json");
 
 module.exports = {
-	name: 'reset',
-	description: "resets a player's balance and stock market share",
-	permissions : 1,
-	execute(message,args) {
-		if (args[1] == null || args[1] == ' ' || args[1] == ''){
+    name: 'reset',
+    description: "resets a player's balance and stock market share",
+    permissions : 1,
+    execute(message,args) {
+	if (args[1] == null || args[1] == ' ' || args[1] == ''){
             message.channel.send(new Discord.MessageEmbed().setDescription('/rest <person-id>'));
             return;
         }
@@ -42,5 +42,5 @@ module.exports = {
         }
         message.channel.send('ok I reset that person !');
         fs.writeFile("./data/balance.json", JSON.stringify(bal), (err) => { if (err) console.log(err) });
-	},
+    },
 };
