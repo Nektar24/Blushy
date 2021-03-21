@@ -6,16 +6,16 @@ const starting = require("../data/variables.json");
 const config = require('../config.json');
 
 module.exports = {
-    name: 'company',
+	name: 'company',
     aliases : ['c'],
     description: "Shows a specific company",
     permissions : 0,
-    execute(message,args) {
+	execute(message,args) {
         if (args[1] == null || args[1] == ' ' || args[1] == ''){
             message.channel.send(new Discord.MessageEmbed().setDescription('/'+args[0] + ' <company-id> [admin] '));
             return;
         }
-        let company = args[1];
+        let company = args[1].toLocaleUpperCase();
         if (companies[company]){
             let a = extras.calculate_growth(companies[company].growth);
             let b = extras.calculate_monthly(companies[company].growth);
@@ -43,8 +43,8 @@ module.exports = {
                 output.addField("Alternative ",(c>=0?'+':'')+c + '%',true);
                 output.addField("Chance of happening",companies[company].alternative_chance + '%',true);
                 output.addField("Goodwill",extras.numberWithCommas(companies[company].goodwill),false);
-                output.addField("Positive Emoji",companies[company].emoji_indicator_1,true);
-                output.addField("Negative Emoji",companies[company].emoji_indicator_2,true);
+                output.addField("Company Emoji",companies[company].emoji_indicator_1,true);
+                output.addField("Loss Emoji",companies[company].emoji_indicator_2,true);
             }
             let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
             let open = '';

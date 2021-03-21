@@ -25,8 +25,8 @@ module.exports = {
 		try { percentage = parseInt(percentage); }catch (err) { message.channel.send("Please type a number");return; }
         if (!Number.isInteger(percentage)) { message.channel.send("Please type a number");return; }
 
-		if (companies[args[1]]){
-			message.channel.send(new Discord.MessageEmbed().setDescription(this.reclaim(message.author.id,args[1],args[2])).setFooter('Type /portfolio to see your investments'));
+		if (companies[args[1].toLocaleUpperCase()]){
+			message.channel.send(new Discord.MessageEmbed().setDescription(this.reclaim(message.author.id,args[1].toLocaleUpperCase(),args[2])).setFooter('Type /portfolio to see your investments'));
 		} else {
 			message.channel.send("That company doesn't exist.");
 		}

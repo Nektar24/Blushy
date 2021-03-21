@@ -25,6 +25,6 @@ module.exports = {
             bal[pingedperson.id].money += tempnumber;
         }
         message.channel.send( 'Added ' + args[2] + starting.Blushies + ' to <@' + pingedperson.id + '> . They now have ' + bal[pingedperson.id].money + ' ' + starting.Blushies);
-        fs.writeFile("/data/balance.json", JSON.stringify(bal), (err) => { if (err) console.log(err) });
+        fs.writeFile("./data/balance.json", JSON.stringify(bal), (err) => { if (err) console.log(err) });
 	},
 };

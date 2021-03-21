@@ -29,15 +29,13 @@ module.exports = {
                     j = 3;
                 break;
             }
-            // gets positive emoji if the alternative growth is a positive number
-            // gets a negative emoji if the alternative growth is a negative number
+            // slows the emoji in slot 2 in the case of alternative growth
             // doesn't get an emoji at all if the growth was normal (not alternative)
             let a = extras.calculate_growth(companies[i].growth);
             let b = companies[i].last_time_had_alternative_growth;
-            let c = companies[i].emoji_indicator_1;
             let d = companies[i].emoji_indicator_2;
             let e = extras.calculate_growth(companies[i].alternative_growth);
-            outputs[j] += '`'+companies[i].id+'` : **'+(b?e:a)+'** %  ' + ((b)?(e>0?c:d):'') +'\n';
+            outputs[j] += '`'+companies[i].id+'` : **'+(b?e:a)+'** %  ' + (b?d:'') +'\n';
         }
         let output = '';
         for (i in outputs){

@@ -6,8 +6,8 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 
 module.exports = {
 	name: 'admin-commands',
-	description: 'Lists all bot admin commands',
-	permissions : 0,
+	description: 'this menu',
+	permissions : 1,
 	execute(message,args) {
         let output = new Discord.MessageEmbed().setTitle('Admin Commands').setFooter('By Nektar24').setColor('#FF0000');
         for (const file of commandFiles) {

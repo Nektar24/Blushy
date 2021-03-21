@@ -5,10 +5,10 @@ let companies = require("../data/companies.json");
 let bal = require("../data/balance.json");
 
 module.exports = {
-    name: 'delete-company',
+	name: 'delete-company',
     description: 'Deletes a company',
     permissions : 1,
-    execute(message,args) {
+	execute(message,args) {
         if (companies[args[1]]){
             for (personid in bal){
                 if (bal[personid].id == 'Goverment') {continue;}
@@ -24,5 +24,5 @@ module.exports = {
             message.channel.send('ok. Deleted company `' + args[1] + '`. `' + peopleaffected + '` people affected (added their investments back to their cash)');
         }
         else {message.channel.send("I can't find that company");}
-    },
+	},
 };

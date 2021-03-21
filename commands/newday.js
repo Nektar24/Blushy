@@ -10,7 +10,7 @@ let days = require("../data/days.json");
 let extras = require("../extras/growth_calculations.js");
 let companies = require("../data/companies.json");
 let bal = require("../data/balance.json");
-//const starting = require("../data/variables.json");
+const starting = require("../data/variables.json");
 
 let timeout = 1000 * 60 * 5; // 5 minutes
 let onhold = false;
@@ -62,8 +62,17 @@ module.exports = {
 			let peopletaxed = 0;
 			for (person in bal){
 				if (bal[person] == bal['Goverment'] || bal[person].id == bal['Goverment'].id){continue;}
+				// if the person's money is less than 100,000 they won't be taxed.
+				let wealthTotal = bal[id].money;
+				for (i in bal[id].companies){
+					wealthTotal += bal[id].companies[i].invested;
+				}
+				if (wealthTotal < starting.TAX_min){continue;}
+
+				// if we get to this point then the person's balance is more than 100,000
 				tax.tax_member(bal[person].id);
 				peopletaxed++;
+				
 			}
 			output += `\n**Tax day** ! ${peopletaxed} people affected.`;
 			exelnumbers.peopletaxed = peopletaxed;

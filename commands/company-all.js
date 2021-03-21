@@ -8,11 +8,12 @@ module.exports = {
 	name: 'company-all',
 	description: "admin command , it's like posting `/company` 12 times",
 	permissions : 1,
-    	execute(message,args) {
-        	let fakeargs = ['/company']
+    execute(message,args) {
+        let fakeargs = ['/company','','']
+        if (args[2] == 'admin') {fakeargs[2] = 'admin';}
 		for (company in companies){
-            		fakeargs[1] = company;
-            		company_command.execute(message,fakeargs);
-        	}
+            fakeargs[1] = company;
+            company_command.execute(message,fakeargs);
+        }
 	},
 };

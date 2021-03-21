@@ -19,11 +19,15 @@ const nektar = config.nektar;
 bot.on("warn", (info) => console.log(info));
 bot.on("error", console.error);
 bot.on('ready',()=>{
-    // once a day calls the newday function
     setTimeout(function(){
+        // once a day calls the newday function
         bot.setInterval(function(){
             bot.commands.get("newday").nextday();
         },1000*60*60*24); // 24h
+        // once every 7.25 days calls shadypepe
+        bot.setInterval(function(){
+            bot.commands.get("shadypepe").appear(config.channels);
+        },1000*60*60*174); // 174h
     },leftToEight());
     console.log('The Bot is online Nek!');
 });
@@ -31,16 +35,6 @@ bot.on('ready',()=>{
 bot.on("message", async (message) => {
     if (message.author.bot){ return; } //message came from human
     if (message.type == 'dm') { return; } //message is in a server
-
-    if (!bal[message.author.id]){
-        bal[message.author.id] = {
-            id: message.author.id,
-            name : message.author.tag,
-            companies : {},
-            money : starting.Starting_Blushies
-        }
-        fs.writeFile("/data/balance.json", JSON.stringify(bal), (err) => { if (err) console.log(err) });
-    }
 
     if(message.content.startsWith('/')){
         const args = message.content.slice(1).trim().split(/ +/);
@@ -56,7 +50,12 @@ bot.on("message", async (message) => {
         try {
             switch (command.permissions){
                 case 0:
-                    command.execute(message, args);
+                case -2:
+                    if (bal[message.author.id]){
+                        command.execute(message, args);
+                    } else {
+                        message.reply("Do `/play` to unlock the rest of the bot.").catch(console.error);
+                    }
                 break;
                 case 1:
                     if (config.adminpermissions.includes(message.author.id)) {
@@ -68,6 +67,9 @@ bot.on("message", async (message) => {
                     if (message.author.id == nektar){
                         command.execute(message, args);
                     }
+                break;
+                case -1:
+                    command.execute(message, args);
                 break;
             }
             
