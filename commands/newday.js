@@ -90,7 +90,7 @@ module.exports = {
 
 		// log changes into excel
 		accessSpreadsheet.accessSpreadsheet(exelnumbers);
-		
+
 		return output;
 	},
 	goodwill(){

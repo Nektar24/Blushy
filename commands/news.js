@@ -6,9 +6,13 @@ const starting = require("../data/variables.json");
 
 module.exports = {
 	name: 'news',
+    aliases : ['n'],
     description: 'Shows a very brief description of all the companies.',
     permissions : 0,
 	execute(message,args) {
+        message.channel.send(new Discord.MessageEmbed().setTitle('Companies').setDescription(this.display()));
+    },
+    display(){
         let outputs = [];
         for (i=0;i<starting.Market_Sector_Order.length;i++){
             outputs.push(`__${starting.Market_Sector_Order[i]}__ :\n`);
@@ -35,12 +39,12 @@ module.exports = {
             let b = companies[i].last_time_had_alternative_growth;
             let d = companies[i].emoji_indicator_2;
             let e = extras.calculate_growth(companies[i].alternative_growth);
-            outputs[j] += '`'+companies[i].id+'` : **'+(b?e:a)+'** %  ' + (b?d:'') +'\n';
+            outputs[j] += companies[i].emoji_indicator_1 + '`'+companies[i].id+'` : **'+(b?e:a)+'** %  ' + (b?d:'') +'\n';
         }
         let output = '';
         for (i in outputs){
             output += outputs[i] + '\n';
         }
-        message.channel.send(new Discord.MessageEmbed().setTitle('Companies').setDescription(output));
-    },
+        return output;
+    }
 };

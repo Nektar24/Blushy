@@ -20,9 +20,11 @@ bot.on("warn", (info) => console.log(info));
 bot.on("error", console.error);
 bot.on('ready',()=>{
     setTimeout(function(){
-        // once a day calls the newday function
+        // calls the newday function at 8 am once
+        newday();
+        // calls the newday function everyday
         bot.setInterval(function(){
-            bot.commands.get("newday").nextday();
+            newday();
         },1000*60*60*24); // 24h
         // once every 7.25 days calls shadypepe
         bot.setInterval(function(){
@@ -88,6 +90,17 @@ function leftToEight(){
         remaining += 24 * 60 * 60 * 1000;
     }
     return remaining;
+}
+
+async function newday(){
+    try {
+        // does the calculations to everyone
+        bot.commands.get("newday").nextday();
+        // posts a message in the market channel
+        let embed = new Discord.MessageEmbed().setTitle("New Day!").setDescription(bot.commands.get("news").display());
+        await await (bot.channels.cache.get(config.channels.market_test_server)).send(embed);
+        await await (bot.channels.cache.get(config.channels.market_wholesome_cafe)).send(embed);
+    } catch(err){console.log("Couldn't send new day message");}
 }
 
 bot.login(config.token);
